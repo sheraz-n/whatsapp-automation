@@ -1,0 +1,43 @@
+To Do:
+
+1- Create account on Twilio for whatsapp bot. Activate it by sending a message to provided twilio whatsapp number from your whatsapp account (We will call this number twilio number now onwards).
+2- Create account and make cluster on mongodb
+3- Download and install node package manager (download node.js installer and install it)
+4- Verify npm using  following: 
+		npm -v
+5- Using npm install packages:
+	npm install -g nodemon  localtunnel
+6- Ready a python environment having flask and python 3.10 (3.10 is not necessary) as follows:
+	conda install flask pymongo dnspython
+	pip install twilio
+7- prepare main.py with following code:
+//////Begin Code//////
+	from flask import Flask, request
+	from twilio.twiml.messaging_response import MessagingResponse
+	app = Flask(__name__)
+	@app.route("/", methods = ["get","post"])
+	def reply():
+	    response = MessagingResponse()
+	    response.message("Hello")
+	    return str(response)
+
+	if __name__ == "__main__":
+	    app.run(port=5000)
+/////End Code ////////
+8- Execute command:
+	nodemon main.py
+9- In second Terminal Execute following: (lt stands for localtunnel, sheraznaseer is name and must be very unique)
+	nodemon --watch "main.py" --exec "lt --subdomain sheraznaseer --port 5000" --delay 3
+10- Step 9 will give you a web address URL like:
+	http://sheraznaseer.loca.lt
+11- Go to twilio.com, open console, go to Messaging->Settings->whatsapp sandbox Settings and Put the above URL in Sandbox Configuration then save.
+12- Test the app by sending a whatsapp message to twilio number (Verify that it is activate). You should get a response. 
+13 - Kill processes by Ctrl+C and npx kill-port 5000
+//////////The first part of the application is complete////////
+1- The next part is to add the mongoDB. This is achieved by using pymongo package
+	from pymongo import MongoClient
+2- Create a Ddatabase and collections in mongoDB by going on to the mongoDB site in our cluster.
+3- Create a connection to DB and get the connection URL.
+cluster = MongoClient("mongodb+srv://imsheraz:19821982@cluster0.ujwntnr.mongodb.net/?retryWrites=true&w=majority")
+# The URL can be achieved by creating a connection to the cluster initilaizeed in Step 2.
+
