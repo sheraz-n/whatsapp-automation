@@ -41,3 +41,8 @@ To Do:
 cluster = MongoClient("mongodb+srv://imsheraz:19821982@cluster0.ujwntnr.mongodb.net/?retryWrites=true&w=majority")
 # The URL can be achieved by creating a connection to the cluster initilaizeed in Step 2.
 
+//// Deploy on Heroku/////
+Create a Procfile contianing following command.
+web: gunicorn app:app --log-file=-
+
+
